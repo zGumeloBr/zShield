@@ -1,4 +1,4 @@
-<img src="https://imgur.com/a/YOJPzUH">
+<img src="imgur.com/a/YOJPzUH">
 
 # zShield
 
