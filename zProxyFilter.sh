@@ -117,6 +117,10 @@ sed -i '/^$/d' proxies.txt
 
 sed -i '/^This/d' proxies.txt
 
+sed -i 's/[a-z]\+//g' proxies.txt
+
+sed -i 's/[A-Z]\+//g' proxies.txt
+
 # Bloqueando todos as proxys coletadas.
 
 for x in $(cat proxies.txt)
@@ -132,28 +136,57 @@ rm *.toml
 
 rm proxies.txt
 
-#Limpando terminal
+#Modulos adicionais e finalização.
 
 clear
+echo -e "\033[1;34m* Você deseja ativar o módulo de bloqueio [Azure] ? \033[0m"
+echo -e "\033[1;34m* Ative este recurso somente se não estiver hospedando seu projeto na azure.  \033[0m"
+echo -e "\033[1;34m* Informações sobre: https://github.com/zGumeloBr/zPF-Azure-Module \033[0m"
+echo -e -n "* Y = Sim N = Não (Y|N): "
+read -r CONFIRM
 
-#Mensagem de finalização
+if [[ "$CONFIRM" =~ [Yy] ]]; then
+    wget -O azure.txt https://raw.githubusercontent.com/zGumeloBr/zPF-Azure-Module/main/azure.txt
+    sed -i 's/$/:/' azure.txt
+    sed -i 's/:.*/:/' azure.txt
+    sed -i 's/[:]\+//g' azure.txt
+    sed -i '/^#/d' azure.txt
+    sed -i '/^$/d' azure.txt
+    sed -i 's/[a-z]\+//g' azure.txt
+    sed -i 's/[A-Z]\+//g' azure.txt
+    for x in $(cat azure.txt)
+    do
+        ipset -A zProxyFilter $x
+    done
 
-echo ""
-echo ""
-echo -e "\033[1;34m ____  ____  ____  _____  _  _  _  _  ____  ____  __    ____  ____  ____ \033[0m"  
-echo -e "\033[1;34m(_   )(  _ \(  _ \(  _  )( \/ )( \/ )( ___)(_  _)(  )  (_  _)( ___)(  _ \\033[0m" 
-echo -e "\033[1;34m / /_  )___/ )   / )(_)(  )  (  \  /  )__)  _)(_  )(__   )(   )__)  )   / \033[0m"
-echo -e "\033[1;34m(____)(__)  (_)\_)(_____)(_/\_) (__) (_)   (____)(____) (__) (____)(_)\_) \033[0m"
-echo ""
-echo -e "\033[0;37m❖ Proxys bloqueadas com sucesso! Lembre-se de sempre re-ativar\033[0m"
-echo -e "\033[0;37messa proteção para atualizar as lista de proxys bloqueadas. \033[0m"
-echo ""
-echo -e "\033[1;33m❖ Total de proxys bloqueadas:\033[0m"
+    iptables -I INPUT -m set --match-set zProxyFilter src -j DROP
+    rm azure.txt
+    clear
+    echo ""
+    echo ""
+    echo -e "\033[1;34m ____  ____  ____  _____  _  _  _  _  ____  ____  __    ____  ____  ____ \033[0m"  
+    echo -e "\033[1;34m(_   )(  _ \(  _ \(  _  )( \/ )( \/ )( ___)(_  _)(  )  (_  _)( ___)(  _ \\033[0m" 
+    echo -e "\033[1;34m / /_  )___/ )   / )(_)(  )  (  \  /  )__)  _)(_  )(__   )(   )__)  )   / \033[0m"
+    echo -e "\033[1;34m(____)(__)  (_)\_)(_____)(_/\_) (__) (_)   (____)(____) (__) (____)(_)\_) \033[0m"
+    echo ""
+    echo -e "\033[0;37m❖ Proxys bloqueadas com sucesso! Lembre-se de sempre re-ativar\033[0m"
+    echo -e "\033[0;37messa proteção para atualizar as lista de proxys bloqueadas. \033[0m"
+    echo ""
+    echo -e "\033[1;33m❖ Módulos adicionais bloqueados:\033[0m"
+    echo ""
+    echo -e "\033[1;33m⋄ Azure\033[0m"
+fi
 
-#Contando proxies bloqueadas
-
-echo ""
-for x in $(wc -l proxies.txt)
-do
-        echo "⋄ | $x"
-done
+if [[ "$CONFIRM" =~ [Nn] ]]; then
+    clear
+    echo ""
+    echo ""
+    echo -e "\033[1;34m ____  ____  ____  _____  _  _  _  _  ____  ____  __    ____  ____  ____ \033[0m"  
+    echo -e "\033[1;34m(_   )(  _ \(  _ \(  _  )( \/ )( \/ )( ___)(_  _)(  )  (_  _)( ___)(  _ \\033[0m" 
+    echo -e "\033[1;34m / /_  )___/ )   / )(_)(  )  (  \  /  )__)  _)(_  )(__   )(   )__)  )   / \033[0m"
+    echo -e "\033[1;34m(____)(__)  (_)\_)(_____)(_/\_) (__) (_)   (____)(____) (__) (____)(_)\_) \033[0m"
+    echo ""
+    echo -e "\033[0;37m❖ Proxys bloqueadas com sucesso! Lembre-se de sempre re-ativar\033[0m"
+    echo -e "\033[0;37messa proteção para atualizar as lista de proxys bloqueadas. \033[0m"
+    echo ""
+fi
