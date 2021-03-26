@@ -2,11 +2,11 @@
 
 ![](https://imgur.com/a/YOJPzUH)
 
-# Informações
+# Sobre
 
 🛡 O zProxyFilter e um sistema que faz a coleta automatica de proxys do tipo SOCKS4, SOCKS5, HTTPS e HTTP e faz o bloqueio utilizando as ferramentas `IPTABLES e IPSET` assim criando uma proteção a mais em sua maquina, o proxyfilter faz uma coleta de 20mil+ proxies a cada execução, recomendamos executar nosso script todo dia, assim atualizando a lista de proxys bloqueadas em seu firewall.
 
-# Funcionamento
+# Recursos
 
 📡 Nosso script funciona com dois sistemas que chamamos de `MPB e APB` que realizam a coleta de grandes quantidades de proxys, disponibilizadas por sites de terceiros, mas como esses sistemas funcionam ? Leia a baixo a rápida explicação deles:
 
@@ -17,12 +17,6 @@ O APB funciona coletando autoamticamente proxys de sistes como `ProxyScraper, Gi
 **❖ MPB (Manual Proxy Blocker):**
 
 O MPB consiste em uma forma de coleta de proxys manual realizada por nossos desenvolvedores, que a cada 24H realizam uma coleta rigorosa de proxys que não podem se obitidas e forma automaticas automatica, assim nosso script sempre que iniciado irá fazer a copia das proxys coletadas e bloquar respectivamente elas.
-
-# Módulos adicionais
-
-Modulos adicionais que são opcionais na hora da instalação do script.
-
-**Azure Blocker: https://github.com/zGumeloBr/zPF-Azure-Module** 
 
 # Sistemas compatíveis
 
@@ -36,9 +30,9 @@ Modulos adicionais que são opcionais na hora da instalação do script.
 |          | 9       | ✅              |
 |          | 8       | ✅              |
 
-# Como utilizar
+# Como instalar
 
-⌨️ Para utilizar o script é super fácil, basta digitar os comandos a baixo que o programa será executado automaticamente.
+⌨️ Siga o guia a baixo para relizar a instalação da proteção.
 
 <pre>
   <code>root@server:~# git clone https://github.com/zGumeloBr/zProxyFilter.git</code>
@@ -55,10 +49,6 @@ Modulos adicionais que são opcionais na hora da instalação do script.
 <pre>
   <code>root@server:~# ./zProxyFilter.sh</code>
 </pre>
-
-# Contato
-
-`Discord:` zGumeloBr#8726
 
 # Contribuidores
 
